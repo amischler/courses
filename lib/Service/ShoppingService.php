@@ -54,26 +54,32 @@ class ShoppingService {
             
             $lists = [];
             foreach ($calendars as $calendar) {
-                // Vérifier si le calendar supporte les tâches (VTODO)
-                if (strpos($calendar->getComponents(), 'VTODO') !== false) {
-                    // Compter les tâches dans ce calendar
+                // Récupérer les objets de ce calendar et compter les tâches
+                try {
                     $query = $this->calendarManager->newQuery($principal);
                     $query->addSearchCalendar($calendar->getUri());
                     $objects = $this->calendarManager->searchForPrincipal($query);
                     
                     $taskCount = 0;
                     foreach ($objects as $object) {
-                        if (strpos($object['objects'][0]['VEVENT_OR_VTODO'], 'VTODO') !== false) {
+                        $calData = $object['objects'][0]['VEVENT_OR_VTODO'] ?? '';
+                        if (strpos($calData, 'BEGIN:VTODO') !== false) {
                             $taskCount++;
                         }
                     }
                     
-                    $lists[] = [
-                        'id' => $calendar->getId(),
-                        'name' => $calendar->getDisplayName(),
-                        'itemsCount' => $taskCount,
-                        'shared' => count($calendar->getShares()) > 0
-                    ];
+                    // N'inclure que les calendars qui ont des tâches
+                    if ($taskCount > 0) {
+                        $lists[] = [
+                            'id' => $calendar->getId(),
+                            'name' => $calendar->getDisplayName(),
+                            'itemsCount' => $taskCount,
+                            'shared' => method_exists($calendar, 'getShares') ? count($calendar->getShares()) > 0 : false
+                        ];
+                    }
+                } catch (\Exception $e) {
+                    $this->logger->warning('Error processing calendar ' . $calendar->getUri() . ': ' . $e->getMessage());
+                    continue;
                 }
             }
             
