@@ -2,10 +2,14 @@
 node_modules/
 vendor/
 
-# Build outputs
-js/
-css/
+# Development build outputs (keep production js/ and css/ for distribution)
 dist/
+
+# Development files
+dev-server.js
+simple-server.js
+vite.config.js
+.eslintrc.cjs
 
 # IDE
 .vscode/

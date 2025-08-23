@@ -7,35 +7,51 @@ Application de gestion collaborative de listes de courses pour Nextcloud.
 ### Prérequis
 - Nextcloud 25+
 - PHP 8.0+
-- Node.js 18+
+
+### Installation rapide (recommandée)
+
+1. **Cloner directement** dans le dossier apps de Nextcloud :
+```bash
+cd /path/to/nextcloud/apps
+git clone https://github.com/amischler/courses.git
+```
+
+2. **Ajuster les permissions** :
+```bash
+cd courses
+chown -R www-data:www-data .
+```
+
+3. **Activer l'application** :
+```bash
+# Via CLI
+php /path/to/nextcloud/occ app:enable courses
+
+# Ou via l'interface admin Nextcloud :
+# Applications → Apps → "Courses" → Activer
+```
 
 ### Installation pour développement
 
-1. Cloner le repository dans le dossier apps de Nextcloud :
+Si vous voulez modifier le code :
+
+1. Cloner le repository :
 ```bash
-cd /path/to/nextcloud/apps
-git clone https://github.com/yourusername/courses.git courses
+git clone https://github.com/amischler/courses.git
+cd courses
 ```
 
-2. Installer les dépendances PHP :
+2. Installer les dépendances :
 ```bash
-cd courses
+npm install --legacy-peer-deps
 composer install
 ```
 
-3. Installer les dépendances JavaScript :
-```bash
-npm install
-```
-
-4. Compiler les assets :
+3. Développer et builder :
 ```bash
 npm run build
-```
-
-5. Activer l'application dans Nextcloud :
-```bash
-occ app:enable courses
+cp dist/js/* js/
+cp dist/css/* css/
 ```
 
 ## Développement
