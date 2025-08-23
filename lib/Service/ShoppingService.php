@@ -6,14 +6,14 @@ namespace OCA\Courses\Service;
 use OCP\IUserSession;
 use OCP\IL10N;
 use OCP\IDBConnection;
-use OCP\ILogger;
+use Psr\Log\LoggerInterface;
 use OCP\Calendar\IManager as ICalendarManager;
 
 class ShoppingService {
     private ?string $userId;
     private IDBConnection $db;
     private IL10N $l10n;
-    private ILogger $logger;
+    private LoggerInterface $logger;
     private ICalendarManager $calendarManager;
 
     private const CATEGORIES = [
@@ -31,7 +31,7 @@ class ShoppingService {
         IUserSession $userSession,
         IDBConnection $db,
         IL10N $l10n,
-        ILogger $logger,
+        LoggerInterface $logger,
         ICalendarManager $calendarManager
     ) {
         $user = $userSession->getUser();
