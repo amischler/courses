@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+    <id>courses</id>
+    <name>Courses</name>
+    <summary>Gestion collaborative de listes de courses</summary>
+    <description><![CDATA[Application de gestion de listes de courses collaborative basée sur l'API Tasks de Nextcloud.
+
+**Fonctionnalités :**
+* Création et gestion de listes de courses
+* Catégorisation des articles
+* Mode hors-ligne avec synchronisation
+* Partage entre utilisateurs
+* Suggestions d'articles fréquents
+    ]]></description>
+    <version>1.0.0</version>
+    <licence>agpl</licence>
+    <author mail="contact@example.com" homepage="https://example.com">Your Name</author>
+    <namespace>Courses</namespace>
+    <category>organization</category>
+    <bugs>https://github.com/yourusername/courses/issues</bugs>
+    <dependencies>
+        <nextcloud min-version="25" max-version="30"/>
+    </dependencies>
+    <navigations>
+        <navigation>
+            <name>Courses</name>
+            <route>courses.page.index</route>
+            <icon>app.svg</icon>
+            <order>10</order>
+        </navigation>
+    </navigations>
+</info>

@@ -1,0 +1,28 @@
+{
+    "name": "nextcloud/courses",
+    "description": "Collaborative shopping list management for Nextcloud",
+    "type": "project",
+    "license": "AGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Your Name",
+            "email": "contact@example.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "nextcloud/ocp": "dev-stable25"
+    },
+    "autoload": {
+        "psr-4": {
+            "OCA\\Courses\\": "lib/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit -c phpunit.xml",
+        "lint": "find . -name \\*.php -not -path './vendor/*' -exec php -l {} \\;"
+    }
+}
