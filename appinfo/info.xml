@@ -20,7 +20,7 @@
     <category>organization</category>
     <bugs>https://github.com/yourusername/courses/issues</bugs>
     <dependencies>
-        <nextcloud min-version="25" max-version="30"/>
+        <nextcloud min-version="25" max-version="32"/>
     </dependencies>
     <navigations>
         <navigation>
