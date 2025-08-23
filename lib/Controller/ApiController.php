@@ -22,6 +22,7 @@ class ApiController extends Controller {
 
     /**
      * @NoAdminRequired
+     * @NoCSRFRequired
      */
     public function getLists(): JSONResponse {
         return new JSONResponse($this->service->getLists());
@@ -51,6 +52,7 @@ class ApiController extends Controller {
 
     /**
      * @NoAdminRequired
+     * @NoCSRFRequired
      */
     public function getItems(int $listId): JSONResponse {
         return new JSONResponse($this->service->getItems($listId));
@@ -80,6 +82,7 @@ class ApiController extends Controller {
 
     /**
      * @NoAdminRequired
+     * @NoCSRFRequired
      */
     public function getCategories(): JSONResponse {
         return new JSONResponse($this->service->getCategories());
@@ -87,6 +90,7 @@ class ApiController extends Controller {
 
     /**
      * @NoAdminRequired
+     * @NoCSRFRequired
      */
     public function getFrequentItems(): JSONResponse {
         return new JSONResponse($this->service->getFrequentItems());
