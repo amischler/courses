@@ -9,12 +9,12 @@ db.version(1).stores({
   queue: '++id, action, data, timestamp'
 })
 
-// Service Worker pour la PWA
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/apps/courses/service-worker.js')
-    .then(reg => console.log('Service Worker registered'))
-    .catch(err => console.error('Service Worker registration failed:', err))
-}
+// Service Worker pour la PWA - Désactivé temporairement (CSP Nextcloud)
+// if ('serviceWorker' in navigator) {
+//   navigator.serviceWorker.register('/apps/courses/service-worker.js')
+//     .then(reg => console.log('Service Worker registered'))
+//     .catch(err => console.error('Service Worker registration failed:', err))
+// }
 
 // Gestion de la queue d'opérations hors-ligne
 export const offlineQueue = {
