@@ -1,9 +1,10 @@
 // Utiliser axios standard pour le développement
-const isDev = !window.OC || !window.OC.webroot
+const isDev = !window.OC
 
 // Construire l'URL de base correctement pour Nextcloud
-const baseUrl = window.OC && window.OC.webroot 
-  ? `${window.OC.webroot}/index.php/apps/courses/api`
+// Toujours utiliser index.php dans Nextcloud
+const baseUrl = window.OC 
+  ? '/index.php/apps/courses/api'
   : '/apps/courses/api'
 
 // Fonction helper pour les requêtes
