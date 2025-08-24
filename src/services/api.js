@@ -1,20 +1,33 @@
-// Utiliser axios standard pour le développement
-const isDev = !window.OC
-
 // Construire l'URL de base correctement pour Nextcloud
-// Toujours utiliser index.php dans Nextcloud
-const baseUrl = window.OC 
-  ? '/index.php/apps/courses/api'
-  : '/apps/courses/api'
+const getBaseUrl = () => {
+  // Si on est dans Nextcloud, utiliser generateUrl si disponible
+  if (window.OC && window.OC.generateUrl) {
+    return window.OC.generateUrl('/apps/courses/api')
+  }
+  // Sinon fallback sur URL directe avec index.php
+  return window.OC ? '/index.php/apps/courses/api' : '/apps/courses/api'
+}
+
+const baseUrl = getBaseUrl()
 
 // Fonction helper pour les requêtes
 async function request(url, options = {}) {
+  // Ajouter les headers requis par Nextcloud
+  const headers = {
+    'Content-Type': 'application/json',
+    'OCS-APIRequest': 'true',
+    ...options.headers,
+  }
+  
+  // Ajouter le token CSRF si disponible
+  if (window.OC && window.OC.requestToken) {
+    headers['requesttoken'] = window.OC.requestToken
+  }
+  
   const response = await fetch(url, {
     ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
+    headers,
+    credentials: 'same-origin',
   })
   
   if (!response.ok) {
